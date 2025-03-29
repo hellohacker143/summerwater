@@ -29,7 +29,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
 
     th, td {
@@ -59,7 +59,7 @@
 
     form {
       max-width: 500px;
-      margin: 0 auto;
+      margin: 0 auto 20px;
       background-color: white;
       padding: 20px;
       border-radius: 8px;
@@ -71,7 +71,7 @@
       margin-bottom: 8px;
     }
 
-    input, textarea {
+    input, textarea, select {
       width: 100%;
       padding: 12px;
       margin-bottom: 15px;
@@ -79,7 +79,7 @@
       border-radius: 8px;
     }
 
-    #orderDetails {
+    #orderDetails, #searchResults {
       margin-top: 30px;
       background-color: #ffffff;
       padding: 20px;
@@ -112,6 +112,13 @@
 
     <label for="shopPhoto">Upload Shop Photo:</label>
     <input type="file" id="shopPhoto" name="shopPhoto" accept="image/*" />
+
+    <label for="payment">Payment Method:</label>
+    <select id="payment" name="payment">
+      <option value="COD">Cash on Delivery</option>
+      <option value="UPI">UPI</option>
+      <option value="Card">Card Payment</option>
+    </select>
 
     <button type="submit">Submit Order</button>
   </form>
@@ -163,38 +170,6 @@
 
   <div id="orderDetails"></div>
 
-  <script>
-    function changeQuantity(qtyId, totalId, price, change) {
-      const qtyElement = document.getElementById(qtyId);
-      const totalElement = document.getElementById(totalId);
-      let currentQty = parseInt(qtyElement.textContent);
-      currentQty += change;
-      if (currentQty < 1) currentQty = 1;
-      qtyElement.textContent = currentQty;
-      totalElement.textContent = `₹${currentQty * price}`;
-    }
-
-    function submitOrder(event) {
-      event.preventDefault();
-      const name = document.getElementById('name').value;
-      const address = document.getElementById('address').value;
-      const phone = document.getElementById('phone').value;
-      const landmark = document.getElementById('landmark').value;
-      const photo = document.getElementById('shopPhoto').files[0];
-
-      const orderDetails = document.getElementById('orderDetails');
-      const orderEntry = document.createElement('div');
-      orderEntry.innerHTML = `<h2>Order Summary (Completed)</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Address:</strong> ${address}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Landmark:</strong> ${landmark}</p>`;
-      if (photo) {
-        const imgURL = URL.createObjectURL(photo);
-        orderEntry.innerHTML += `<p><strong>Shop Photo:</strong></p><img src="${imgURL}" alt="Shop Photo">`;
-      }
-      orderDetails.appendChild(orderEntry);
-    }
-  </script>
+  <script src="orderscript.js"></script>
 </body>
 </html>
