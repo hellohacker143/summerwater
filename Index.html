@@ -3,173 +3,87 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Water Bottle Order</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <title>Login Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
     body {
+      font-family: 'Poppins', sans-serif;
       background-color: #e3f2fd;
-      color: #333;
-      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
     }
 
-    h1, h2 {
+    .login-container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+
+    h2 {
       text-align: center;
-      margin-bottom: 20px;
+      color: #00796b;
     }
 
-    table {
+    label {
+      margin-top: 10px;
+      display: block;
+    }
+
+    input {
       width: 100%;
-      border-collapse: collapse;
+      padding: 10px;
+      margin-top: 8px;
       margin-bottom: 20px;
-    }
-
-    th, td {
-      border: 1px solid #00796b;
-      padding: 15px;
-      text-align: center;
-    }
-
-    th {
-      background-color: #00796b;
-      color: white;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
 
     button {
+      width: 100%;
       background-color: #00796b;
       color: white;
       border: none;
-      cursor: pointer;
-      padding: 8px 12px;
+      padding: 12px;
       border-radius: 5px;
-      margin: 0 5px;
+      cursor: pointer;
+      font-size: 16px;
     }
 
     button:hover {
       background-color: #004d40;
     }
-
-    form {
-      max-width: 500px;
-      margin: 0 auto 20px;
-      background-color: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    input, textarea, select {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-
-    #orderDetails, #searchResults {
-      margin-top: 30px;
-      background-color: #ffffff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    img {
-      max-width: 200px;
-      margin-top: 10px;
-    }
   </style>
 </head>
 <body>
-  <h1>Water Bottle Order Form</h1>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form onsubmit="login(event)">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required />
 
-  <h2>Customer Information</h2>
-  <form onsubmit="submitOrder(event)" enctype="multipart/form-data">
-    <label for="name">Customer Name:</label>
-    <input type="text" id="name" name="name" required />
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required />
 
-    <label for="address">Address:</label>
-    <input type="text" id="address" name="address" required />
+      <button type="submit">Login</button>
+    </form>
+  </div>
 
-    <label for="phone">Phone Number:</label>
-    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="1234567890" required />
-
-    <label for="landmark">Landmark:</label>
-    <input type="text" id="landmark" name="landmark" />
-
-    <label for="shopPhoto">Upload Shop Photo:</label>
-    <input type="file" id="shopPhoto" name="shopPhoto" accept="image/*" />
-
-    <label for="payment">Payment Method:</label>
-    <select id="payment" name="payment">
-      <option value="COD">Cash on Delivery</option>
-      <option value="UPI">UPI</option>
-      <option value="Card">Card Payment</option>
-    </select>
-
-    <button type="submit">Submit Order</button>
-  </form>
-
-  <h2>Available Products</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Price (₹)</th>
-        <th>Total (₹)</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1L Water Bottle</td>
-        <td id="qty1">1</td>
-        <td>₹10</td>
-        <td id="total1">₹10</td>
-        <td>
-          <button onclick="changeQuantity('qty1', 'total1', 10, 1)">+</button>
-          <button onclick="changeQuantity('qty1', 'total1', 10, -1)">-</button>
-        </td>
-      </tr>
-      <tr>
-        <td>5L Water Can</td>
-        <td id="qty2">1</td>
-        <td>₹20</td>
-        <td id="total2">₹20</td>
-        <td>
-          <button onclick="changeQuantity('qty2', 'total2', 20, 1)">+</button>
-          <button onclick="changeQuantity('qty2', 'total2', 20, -1)">-</button>
-        </td>
-      </tr>
-      <tr>
-        <td>10L Water Can</td>
-        <td id="qty3">1</td>
-        <td>₹40</td>
-        <td id="total3">₹40</td>
-        <td>
-          <button onclick="changeQuantity('qty3', 'total3', 40, 1)">+</button>
-          <button onclick="changeQuantity('qty3', 'total3', 40, -1)">-</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div id="orderDetails"></div>
-
-  <script src="orderscript.js"></script>
+  <script>
+    function login(event) {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      if (username === 'admin' && password === 'admin123') {
+        alert('Login successful!');
+      } else {
+        alert('Invalid username or password');
+      }
+    }
+  </script>
 </body>
 </html>
